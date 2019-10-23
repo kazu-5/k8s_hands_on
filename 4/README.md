@@ -28,14 +28,9 @@ Connecting to localhost (127.0.0.1:80)
 index.html           100% |**********************************************************************************************************************************|   612  0:00:00 ETA
 ```
 
-## 4.Pod削除
+## 4.deployment削除
 ```
-> kubectl -n app delete pod nginx
+> kubectl -n app delete deployment nginx
 pod "nginx" deleted
 ```
 
-## 5.namespace削除
-```
->kubectl delete ns app
-namespace "app" deleted
-```
