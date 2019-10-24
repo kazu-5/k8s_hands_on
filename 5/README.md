@@ -1,4 +1,4 @@
-## 2.Pod作成
+## 1.Deployment作成
 ```
 > kubectl -n app apply -f .
 configmap/nginx-config unchanged
@@ -21,14 +21,14 @@ nginx-857fdb9c5f-kqwk5   1/1     Running   0          3m49s
 nginx-857fdb9c5f-w8nch   1/1     Running   0          3m49s
 ```
 
-## 3.`wget`コマンド実行
+## 2.`wget`コマンド実行
 ```
 > kubectl -n app exec -it nginx-857fdb9c5f-6n2lt -- sh -c "wget localhost"
 Connecting to localhost (127.0.0.1:80)
 index.html           100% |**********************************************************************************************************************************|   612  0:00:00 ETA
 ```
 
-## 4.deployment削除
+## 3.deployment削除
 ```
 > kubectl -n app delete deployment nginx
 pod "nginx" deleted
