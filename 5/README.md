@@ -1,36 +1,42 @@
 ## 1.Deployment作成
 ```
-> kubectl -n app apply -f .
-configmap/nginx-config unchanged
+> kubectl apply -f .
+configmap/nginx-config created
 deployment.apps/nginx created
-
-> kubectl -n app get pod
-NAME                     READY   STATUS    RESTARTS   AGE
-nginx-857fdb9c5f-6n2lt   1/1     Running   0          44s
-nginx-857fdb9c5f-kqwk5   1/1     Running   0          44s
-nginx-857fdb9c5f-w8nch   1/1     Running   0          44s
-
-> kubectl -n app get deployment nginx
-NAME    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-nginx   3         3         3            3           3m13s
-
-> kubectl -n app get po -l app=nginx
-NAME                     READY   STATUS    RESTARTS   AGE
-nginx-857fdb9c5f-6n2lt   1/1     Running   0          3m49s
-nginx-857fdb9c5f-kqwk5   1/1     Running   0          3m49s
-nginx-857fdb9c5f-w8nch   1/1     Running   0          3m49s
+service/nginx-service created
 ```
 
-## 2.`wget`コマンド実行
+## 2. kubectl get all
 ```
-> kubectl -n app exec -it nginx-857fdb9c5f-6n2lt -- sh -c "wget localhost"
-Connecting to localhost (127.0.0.1:80)
-index.html           100% |**********************************************************************************************************************************|   612  0:00:00 ETA
+> kubectl get all
+NAME                        READY   STATUS    RESTARTS   AGE
+pod/nginx-bcd54c469-cg6xm   1/1     Running   0          68s
+pod/nginx-bcd54c469-l9529   1/1     Running   0          68s
+pod/nginx-bcd54c469-qzxqh   1/1     Running   0          68s
+
+
+NAME                    TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+service/nginx-service   NodePort   10.101.161.213   <none>        80:32148/TCP   69s
+
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   3/3     3            3           69s
+
+NAME                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-bcd54c469   3         3         3       69s
+
 ```
 
-## 3.deployment削除
+## 3.curlコマンド
 ```
-> kubectl -n app delete deployment nginx
-pod "nginx" deleted
+> curl 192.168.99.100:32148
+<html>
+<head><title>302 Found</title></head>
+<body>
+<center><h1>302 Found</h1></center>
+<hr><center>nginx/1.17.5</center>
+</body>
+</html>
+
 ```
 
