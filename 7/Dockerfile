@@ -8,3 +8,5 @@ RUN gem install bundler
 RUN bundle install
 
 COPY ./app .
+
+CMD bundle exec rails s -b 0
