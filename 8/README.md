@@ -1,3 +1,8 @@
+helm install stable/mysql --generate-name --namespace app
+
+
+
+
 
 helm install stable/mysql --generate-name
 
