@@ -43,7 +43,6 @@ X-Runtime: 0.003727
 ```
 
 ```
-> curl -I (minikube ip) (kubectl -n app get service rails-service -o json | jq ".spec.ports[0].nodePort")
-curl: (7) Failed to connect to 192.168.64.2 port 80: Connection refused
-curl: (7) Failed to connect to 192.168.64.2 port 80: Connection refused
+> curl -I (minikube ip):(kubectl -n app get service rails-service -o json | jq ".spec.ports[0].nodePort")
+curl: (7) Failed to connect to 192.168.64.2 port 32148: Connection refused
 ```
