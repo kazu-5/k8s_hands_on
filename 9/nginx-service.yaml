@@ -5,10 +5,10 @@ metadata:
   namespace: app
 spec:
   ports:
-    - nodePort: 32148
-      port: 80
-      protocol: TCP
-      targetPort: 80
+#    - nodePort: 32148
+  - port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
-    app: nginx
+    app: rails
   type: NodePort
