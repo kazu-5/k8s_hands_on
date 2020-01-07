@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    build: .
+    volumes:
+      - .:/var/www/rails-app
+    ports:
+      - 3000:3000
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:

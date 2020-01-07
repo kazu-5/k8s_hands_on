@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rails
+  namespace: app
+spec:
+  selector:
+    matchLabels:
+      app: rails
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: rails
+    spec:
+      volumes:
+        - name: nginx-config-default
+          configMap:
+            name: nginx-config
+      containers:
+        - image: gcr.io/k8s-hands-on-262513/rails-app
+          name: app
+          env:
+            - name: DB_HOST
+              value: "mysql.app"
+            - name: DB_PASSWORD
+              value: "password"
+        - image: nginx:alpine
+          name: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config-default
+              mountPath: /etc/nginx/conf.d/

@@ -5,9 +5,9 @@ metadata:
   namespace: app
 spec:
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
+    - port: 80
+      protocol: TCP
+      targetPort: 80
   selector:
     app: rails
-  type: NodePort
+  type: LoadBalancer
