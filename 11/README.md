@@ -1,3 +1,5 @@
+gcloud auth login
+
 gcloud services enable containerregistry.googleapis.com
 
 docker tag app gcr.io/k8s-hands-on-262513/rails-app

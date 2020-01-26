@@ -20,15 +20,15 @@ spec:
           configMap:
             name: nginx-config
       containers:
-        - name: nginx
-          image: nginx:alpine
+        - image: nginx:alpine
+          name: nginx
           ports:
             - containerPort: 80
           volumeMounts:
             - name: nginx-config-default
               mountPath: /etc/nginx/conf.d/
-        - name: app
-          image: app:1
+        - image: app:1
+          name: app
           env:
             - name: DB_HOST
               value: "mysql.app"

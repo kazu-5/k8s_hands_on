@@ -2,7 +2,7 @@ eval (minikube  docker-env)
 
 docker build -t app:1 .
 
-kubectl -n app exec -it -c nginx $(kubectl get po -l app=rails -o json | jq -r ".items[0].metadata.name") -- ash -c "apk add --update curl && curl -I localhost"
+kubectl -n app exec -it -c nginx (kubectl get po -l app=rails -o json | jq -r ".items[0].metadata.name") -- ash -c "apk add --update curl && curl -I localhost"
 
 ```
 > kubectl exec -it -c app (kubectl get pod -l app=rails -o json | jq -r ".items[0].metadata.name") -- curl -I localhost:3000
@@ -62,3 +62,8 @@ X-Request-Id: 3c5c0b71-4301-4c93-895f-72d67819c827
 X-Runtime: 0.006951
 
 ```
+
+
+
+kubectl -n app exec -it -c app rails-655566cbbf-hgthc -- rails console
+
