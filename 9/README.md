@@ -4,6 +4,7 @@ docker build -t app:1 .
 
 kubectl -n app exec -it -c nginx (kubectl get po -l app=rails -o json | jq -r ".items[0].metadata.name") -- ash -c "apk add --update curl && curl -I localhost"
 
+### 内部からpumaにcurlで接続できる
 ```
 > kubectl exec -it -c app (kubectl get pod -l app=rails -o json | jq -r ".items[0].metadata.name") -- curl -I localhost:3000
 HTTP/1.1 200 OK
@@ -21,6 +22,7 @@ X-Request-Id: 615f963b-a0e5-4fcc-b319-ec86115f0919
 X-Runtime: 0.010104
 ```
 
+### 内部からngnxにcurlで接続できる
 ```
 > kubectl -n app exec -it -c nginx (kubectl get po -l app=rails -o json | jq -r ".items[0].metadata.name") -- ash -c "apk add --update curl && curl -I localhost"
 OK: 30 MiB in 41 packages
@@ -42,6 +44,7 @@ X-Request-Id: 711b9bb7-cd06-453a-acce-a67130605025
 X-Runtime: 0.003727
 ```
 
+### 外部からcurlで接続できる
 ```
 > curl -I (minikube ip):(kubectl -n app get service rails-service -o json | jq ".spec.ports[0].nodePort")
 HTTP/1.1 200 OK
